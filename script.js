@@ -100,11 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('hours').innerText = '00';
             document.getElementById('minutes').innerText = '00';
             document.getElementById('seconds').innerText = '00';
-            
-            // Enable start button fully
-            startMagicBtn.classList.remove('disabled-btn');
-            startMagicBtn.removeAttribute('disabled');
-            startMagicBtn.querySelector('.btn-text').innerText = "Sihri Başlat 💖";
             clearInterval(countdownInterval);
         } else {
             // Still counting down
@@ -112,12 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('hours').innerText = formatNumber(Math.max(0, hoursVal));
             document.getElementById('minutes').innerText = formatNumber(Math.max(0, minutesVal));
             document.getElementById('seconds').innerText = formatNumber(Math.max(0, secondsVal));
-            
-            // Strictly lock the button until midnight
-            startMagicBtn.classList.add('disabled-btn');
-            startMagicBtn.setAttribute('disabled', 'true');
-            startMagicBtn.querySelector('.btn-text').innerText = "Sihri Başlat (🔒 Kilitli)";
         }
+
+        // ALWAYS keep it active since it is officially May 31 midnight!
+        startMagicBtn.classList.remove('disabled-btn');
+        startMagicBtn.removeAttribute('disabled');
+        startMagicBtn.querySelector('.btn-text').innerText = "Sihri Başlat 💖";
     }
 
     // Run immediately and then every second
@@ -126,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start Magic Button Click
     startMagicBtn.addEventListener('click', (e) => {
-        if (startMagicBtn.classList.contains('disabled-btn')) return;
         createHeartExplosion(e.clientX, e.clientY);
         toggleMusic(true); // Attempt to start music on first major click
         
