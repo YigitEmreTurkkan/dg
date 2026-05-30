@@ -1,39 +1,52 @@
-/* --- Global Styles & Setup --- */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito+Sans:wght@400;600&display=swap');
+/* --- Global Styles & Design System --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Parisienne&display=swap');
 
 :root {
-    --bg-color-1: #e0c3fc;
-    --bg-color-2: #8ec5fc;
+    --primary-romantic: #ff758f;
+    --primary-soft-pink: #ffb3c1;
+    --accent-gold: #f4d03f;
+    --accent-coral: #ff85a1;
+    --glass-bg: rgba(255, 255, 255, 0.18);
+    --glass-border: rgba(255, 255, 255, 0.35);
+    --glass-shadow: 0 12px 40px 0 rgba(255, 117, 143, 0.15);
+    
+    --bg-color-1: #ffe5ec;
+    --bg-color-2: #ffc2d1;
     --bg-color-3: #f0c3fc;
     --bg-color-4: #c3e8fc;
-    --text-dark: #333;
+    --text-dark: #4a2830;
     --text-light: #fff;
-    --accent-gold: #FFD700;
-    --accent-deep-purple: #5a189a;
-    --book-cover-color: #7b2cbf;
-    --book-page-color: #f8f7f2;
-    --shadow-color: rgba(0, 0, 0, 0.2);
+    --book-cover-color: #8c3a5c;
+    --book-page-color: #fdfbf7;
+    --shadow-color: rgba(74, 40, 48, 0.15);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
 
 body {
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
     color: var(--text-dark);
+    background: var(--bg-color-1);
+    -webkit-tap-highlight-color: transparent;
 }
 
+/* --- Animated Magic Background --- */
 .background-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: -2;
     background: linear-gradient(135deg, var(--bg-color-1), var(--bg-color-2), var(--bg-color-3), var(--bg-color-4));
     background-size: 400% 400%;
     animation: gradientShift 20s ease infinite;
@@ -45,6 +58,18 @@ body {
     100% { background-position: 0% 50%; }
 }
 
+/* Floating Heart Element Styling */
+.floating-heart {
+    position: absolute;
+    color: var(--primary-romantic);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: -1;
+    user-select: none;
+    filter: drop-shadow(0 2px 5px rgba(255, 117, 143, 0.2));
+}
+
+/* --- Step Controller --- */
 .step {
     display: none;
     justify-content: center;
@@ -56,78 +81,347 @@ body {
     left: 0;
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
+    padding: 20px;
 }
 
-.step.active { display: flex; opacity: 1; }
+.step.active { 
+    display: flex; 
+    opacity: 1; 
+}
+
+/* --- Glassmorphism Panels --- */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: var(--glass-shadow);
+}
+
+/* --- Typography --- */
+.romantic-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.subtitle {
+    font-size: 1.05rem;
+    color: #6a3e4a;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
 
 .instruction-text {
     margin-top: 25px;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 600;
-    color: var(--text-light);
-    text-shadow: 1px 1px 3px var(--shadow-color);
-    animation: fadeIn 1s 0.5s both;
+    color: #6a3e4a;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 8px 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    animation: pulseGlow 2s infinite ease-in-out;
 }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulseGlow {
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(255, 117, 143, 0.1); }
+    50% { transform: scale(1.03); box-shadow: 0 4px 20px rgba(255, 117, 143, 0.25); }
+}
 
+/* --- Buttons & Interactions --- */
+.action-btn {
+    padding: 14px 32px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.glow-btn {
+    background: linear-gradient(135deg, var(--primary-romantic), var(--accent-coral));
+    color: white;
+    box-shadow: 0 8px 25px rgba(255, 117, 143, 0.4);
+}
+
+.glow-btn:hover:not(.disabled-btn) {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(255, 117, 143, 0.6);
+}
+
+.glow-btn:active:not(.disabled-btn) {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.disabled-btn {
+    background: #e2c0c7 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+    box-shadow: none !important;
+}
+
+/* --- Step 0: Geri Sayım --- */
+.countdown-container {
+    padding: 40px 30px;
+    max-width: 500px;
+    width: 95%;
+    text-align: center;
+}
+
+.heart-pulse-icon {
+    font-size: 3rem;
+    display: inline-block;
+    animation: heartBeat 1.2s infinite cubic-bezier(0.215, 0.610, 0.355, 1);
+    margin-bottom: 15px;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(0.95); }
+    5% { transform: scale(1.1); }
+    39% { transform: scale(0.85); }
+    45% { transform: scale(1.05); }
+    60% { transform: scale(0.95); }
+    100% { transform: scale(0.95); }
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+}
+
+.timer-block {
+    flex: 1;
+    margin: 0 6px;
+    background: rgba(255, 255, 255, 0.45);
+    padding: 12px 8px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+.timer-number {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-romantic);
+}
+
+.timer-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #8c5b66;
+    margin-top: 4px;
+    display: block;
+}
+
+/* --- Music Player UI --- */
+.music-toggle {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 15px rgba(255, 117, 143, 0.15);
+    z-index: 100;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.music-toggle:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+.music-icon-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 20px;
+    height: 18px;
+}
+
+.music-bar {
+    width: 4px;
+    height: 100%;
+    background-color: var(--primary-romantic);
+    border-radius: 2px;
+    transform-origin: bottom;
+    transition: height 0.3s ease;
+}
+
+/* Music Playing Bars Animation */
+.music-toggle.playing .bar-1 { animation: equalize 1.2s ease-in-out infinite alternate; }
+.music-toggle.playing .bar-2 { animation: equalize 0.8s ease-in-out infinite alternate; animation-delay: 0.15s; }
+.music-toggle.playing .bar-3 { animation: equalize 1.4s ease-in-out infinite alternate; animation-delay: 0.3s; }
+
+.music-toggle:not(.playing) .music-bar {
+    height: 4px;
+}
+
+@keyframes equalize {
+    0% { transform: scaleY(0.2); }
+    100% { transform: scaleY(1); }
+}
+
+.music-tooltip {
+    position: absolute;
+    right: 60px;
+    background: var(--text-dark);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+.music-toggle:hover .music-tooltip {
+    opacity: 0.9;
+}
 
 /* --- Step 1: Gift Box --- */
-.gift-container { text-align: center; cursor: pointer; }
-.gift-box { position: relative; width: 150px; height: 150px; background-color: var(--accent-deep-purple); border-radius: 12px; }
+.gift-container { 
+    text-align: center; 
+    cursor: pointer; 
+}
+
+.gift-box { 
+    position: relative; 
+    width: 160px; 
+    height: 160px; 
+    background-color: var(--primary-romantic); 
+    border-radius: 16px; 
+    margin: 0 auto;
+    box-shadow: 0 10px 25px rgba(255, 117, 143, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.gift-box:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
 .gift-lid {
     position: absolute;
-    width: 170px;
-    height: 40px;
-    background-color: #9d4edd;
+    width: 180px;
+    height: 44px;
+    background-color: #ff5277;
     top: -20px;
     left: -10px;
     border-radius: 8px;
-    transition: transform 0.5s ease-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 .gift-bow::before, .gift-bow::after {
     content: '';
     position: absolute;
-    width: 25px;
-    height: 60px;
+    width: 30px;
+    height: 70px;
     background-color: var(--accent-gold);
     border-radius: 50%;
-    top: -45px;
+    top: -50px;
     z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .gift-bow::before { left: 55px; transform: rotate(-45deg); }
-.gift-bow::after { left: 80px; transform: rotate(45deg); }
-.gift-container.open .gift-lid { transform: translateY(-80px) rotate(15deg); }
+.gift-bow::after { left: 75px; transform: rotate(45deg); }
+
+/* Gift Lid Flips Open */
+.gift-container.open .gift-lid { 
+    transform: translateY(-90px) rotate(25deg) scale(0.9); 
+    opacity: 0;
+}
 
 /* --- Step 2: Key --- */
-.key-container { text-align: center; }
-.key-svg { width: 150px; height: 150px; stroke: var(--accent-gold); filter: drop-shadow(0 0 10px gold); }
-#animatedKey {
-    stroke-dasharray: 500;
-    stroke-dashoffset: 500;
-    animation: drawKey 2s ease-out forwards;
-    transition: transform 0.5s ease-in-out;
+.key-container { 
+    text-align: center; 
+    cursor: pointer;
 }
-@keyframes drawKey { to { stroke-dashoffset: 0; } }
-.key-container.unlocking #animatedKey {
-    transform: translateY(100px) scale(0.2) rotate(-90deg);
+
+.key-svg { 
+    width: 160px; 
+    height: 160px; 
+    filter: drop-shadow(0 0 15px gold); 
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.key-container:hover .key-svg {
+    transform: scale(1.1) rotate(15deg);
+    filter: drop-shadow(0 0 25px #ffd700);
+}
+
+#animatedKey path {
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation: drawKey 2.5s ease-out forwards;
+}
+
+@keyframes drawKey { 
+    to { stroke-dashoffset: 0; } 
+}
+
+.key-container.unlocking .key-svg {
+    transform: translateY(120px) scale(0.1) rotate(-180deg);
     opacity: 0;
 }
 
 
-/* --- Step 3 & 4: Storybook (FIX APPLIED HERE) --- */
-.storybook-container { perspective: 1500px; }
+/* --- Step 3 & 4: 3D Storybook --- */
+.book-section-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+}
+
+.storybook-container { 
+    perspective: 2000px; 
+    width: 480px;
+    height: 360px;
+    margin: 20px 0;
+}
+
 .book {
-    width: 400px;
-    height: 300px;
+    width: 100%;
+    height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 1s ease-in-out;
-    opacity: 0;
-    transform: rotateY(-30deg) scale(0.5);
+    transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+    transform: rotateY(-28deg) rotateX(8deg);
+    box-shadow: 0 15px 45px rgba(74, 40, 48, 0.18);
+    border-radius: 12px;
 }
-.storybook-container.visible .book { opacity: 1; transform: rotateY(-30deg) scale(1); }
-.storybook-container.opening .book { transform: rotateY(0deg) scale(1.2); }
+
+/* Opened view of book (flattens angle) */
+.book.opened {
+    transform: rotateY(0deg) rotateX(0deg) translateX(50%);
+    box-shadow: 0 25px 60px rgba(74, 40, 48, 0.25);
+}
 
 .book-cover, .page {
     width: 100%;
@@ -135,76 +429,277 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    transform-style: preserve-3d; /* Apply to all 3D objects */
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    transition: transform 1.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-.book-cover {
-    transform-origin: left;
-    transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1);
-    z-index: 10;
-}
+/* Ensure proper overlapping indices */
+.book-cover { z-index: 10; cursor: pointer; }
+#page1 { z-index: 8; }
+#page2 { z-index: 7; }
+#page3 { z-index: 6; }
+#page4 { z-index: 5; }
+#page5 { z-index: 4; }
+
+/* Cover Front & Back */
 .cover-front, .cover-back {
     width: 100%;
     height: 100%;
     position: absolute;
-    background-color: var(--book-cover-color);
-    border-radius: 5px;
-    backface-visibility: hidden; /* Hide when facing away */
+    border-radius: 10px 14px 14px 10px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
+
 .cover-front {
+    background: linear-gradient(135deg, var(--book-cover-color), #5e223a);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 5px 20px var(--shadow-color);
+    border-left: 10px solid #521930;
+    padding: 20px;
+    text-align: center;
+    box-shadow: inset -4px 0 10px rgba(0,0,0,0.3), 5px 5px 15px rgba(0,0,0,0.15);
 }
+
 .book-title {
     font-family: 'Playfair Display', serif;
     color: var(--accent-gold);
-    font-size: 2.5rem;
-    border: 2px solid var(--accent-gold);
-    padding: 10px 20px;
-    border-radius: 5px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.3;
+    border-top: 3px double var(--accent-gold);
+    border-bottom: 3px double var(--accent-gold);
+    padding: 15px 10px;
+    letter-spacing: 1px;
 }
+
+.title-sub {
+    font-family: 'Parisienne', cursive;
+    font-size: 2.8rem;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    text-transform: none;
+    display: block;
+    margin-top: 6px;
+}
+
+.cover-date {
+    margin-top: 30px;
+    color: #e2b3c2;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.cover-sparkle {
+    font-size: 1.5rem;
+    position: absolute;
+    animation: sparkleSlow 3s infinite ease-in-out;
+}
+.cover-sparkle.left { top: 30px; left: 30px; }
+.cover-sparkle.right { bottom: 30px; right: 30px; animation-delay: 1.5s; }
+
+@keyframes sparkleSlow {
+    0%, 100% { transform: scale(0.8); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 1; filter: drop-shadow(0 0 5px gold); }
+}
+
 .cover-back {
-    transform: rotateY(180deg); /* Pre-flip the back */
+    background: #ebd5dc;
+    transform: rotateY(180deg);
+    box-shadow: inset 10px 0 20px rgba(0,0,0,0.15);
+    border-right: 4px solid rgba(0,0,0,0.08);
 }
-.storybook-container.open .book-cover { transform: rotateY(-180deg); }
 
-.page {
-    transform-origin: left;
-    transition: transform 1.2s ease-in-out;
-    background-color: var(--book-page-color);
-    border-radius: 0 5px 5px 0;
-    box-shadow: inset -1px 0 2px rgba(0,0,0,0.1);
+/* Flipped State for Cover */
+.book-cover.flipped {
+    transform: rotateY(-180deg);
+    z-index: 1; /* Drop index once open */
 }
-#page1 { z-index: 8; }
-#page2 { z-index: 7; }
 
+/* --- Storybook Pages --- */
 .page-front, .page-back {
     position: absolute;
     width: 100%;
     height: 100%;
-    padding: 20px;
+    padding: 24px;
+    background-color: var(--book-page-color);
+    border-radius: 0 10px 10px 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    box-shadow: inset 5px 0 15px rgba(0,0,0,0.06);
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--book-page-color); /* Ensure background is set here */
-    border-radius: 0 5px 5px 0;
-    backface-visibility: hidden; /* **FIX**: Hide when facing away */
 }
 
 .page-back {
-    transform: rotateY(180deg); /* **FIX**: Pre-flip the back of the page */
-}
-
-.page-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    text-align: center;
+    transform: rotateY(180deg);
+    border-radius: 10px 0 0 10px;
+    box-shadow: inset -5px 0 15px rgba(0,0,0,0.06);
+    background-color: #faf7f0;
 }
 
 .page.flipped {
-    transform: rotateY(-180deg); /* The main flipping animation */
+    transform: rotateY(-180deg);
+    z-index: 9; /* Ensure currently flipped page is on top of stack */
+}
+
+/* Polaroid Photo Styling */
+.polaroid-frame {
+    background: white;
+    padding: 14px 14px 28px 14px;
+    box-shadow: 0 8px 20px rgba(74, 40, 48, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transform: rotate(-2deg);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.polaroid-frame:hover {
+    transform: rotate(0deg) scale(1.04);
+    box-shadow: 0 15px 30px rgba(74, 40, 48, 0.18);
+}
+
+.polaroid-img {
+    width: 250px;
+    height: 200px;
+    object-fit: cover;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 2px;
+}
+
+.polaroid-caption {
+    font-family: 'Parisienne', cursive;
+    font-size: 1.6rem;
+    color: #4a2830;
+    margin-top: 14px;
+    text-align: center;
+}
+
+/* Romantic Quotes & Personal Notes Styling */
+.poem-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+}
+
+.poem-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: #4a2830;
+    position: relative;
+    padding: 0 10px;
+}
+
+.poem-quote::before, .poem-quote::after {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--primary-soft-pink);
+    position: absolute;
+    line-height: 1;
+    opacity: 0.5;
+}
+.poem-quote::before { top: -15px; left: -10px; }
+.poem-quote::after { bottom: -35px; right: -10px; }
+
+.poem-author {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #8c5b66;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.poem-divider {
+    font-size: 1.2rem;
+    color: var(--primary-romantic);
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+}
+.poem-divider::before, .poem-divider::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 117, 143, 0.4), transparent);
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.personal-note {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #5c3b43;
+    font-weight: 400;
+}
+
+/* Book Navigation Buttons & Instruction */
+.book-nav-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    z-index: 10;
+}
+
+.nav-btn {
+    padding: 8px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 30px;
+    background: white;
+    border: 1px solid rgba(255, 117, 143, 0.3);
+    color: var(--text-dark);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: var(--primary-romantic);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 117, 143, 0.25);
+}
+
+.nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.page-indicator {
+    margin: 0 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #5c3b43;
+    background: rgba(255,255,255,0.5);
+    padding: 4px 14px;
+    border-radius: 20px;
+}
+
+.book-instruction {
+    font-size: 0.85rem;
+    color: #8c5b66;
+    margin-top: 12px;
+    font-weight: 500;
+    text-align: center;
 }
 
 
@@ -216,36 +711,88 @@ body {
     justify-content: center;
     align-items: center;
 }
+
 .finale-card {
     position: relative;
     text-align: center;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 10px 30px var(--shadow-color);
-    width: 90%;
-    max-width: 600px;
+    padding: 45px 35px;
+    width: 95%;
+    max-width: 580px;
     opacity: 0;
-    animation: fadeIn 1s 1s forwards;
+    animation: scaleInCard 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.1) 0.5s forwards;
+    z-index: 10;
 }
+
+@keyframes scaleInCard {
+    from { opacity: 0; transform: scale(0.85) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.card-decor-hearts {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    letter-spacing: 5px;
+}
+
 .finale-greeting {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    color: var(--accent-deep-purple);
+    font-family: 'Parisienne', cursive;
+    font-size: 3.5rem;
+    color: var(--primary-romantic);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    line-height: 1;
 }
+
 .finale-name {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 4rem;
-    color: var(--accent-deep-purple);
+    font-size: 3.8rem;
+    color: var(--book-cover-color);
+    margin: 5px 0 15px 0;
+    text-shadow: 0 4px 8px rgba(140, 58, 92, 0.15);
+}
+
+.heart-pulse-large {
+    font-size: 2.2rem;
+    animation: heartBeat 1.2s infinite;
     margin: 10px 0;
 }
+
 .finale-wish {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin-top: 20px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #5c2835;
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+.signature {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: #8c5b66;
+    margin-bottom: 30px;
+}
+
+.sig-name {
+    font-family: 'Parisienne', cursive;
+    font-size: 2.6rem;
+    color: var(--primary-romantic);
+    font-style: normal;
+    font-weight: 700;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.restart-btn {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255, 117, 143, 0.3);
+    color: var(--text-dark);
+}
+
+.restart-btn:hover {
+    background: var(--primary-romantic);
+    color: white;
 }
 
 /* Floral SVG Animation */
@@ -258,35 +805,195 @@ body {
     height: 100%;
     z-index: -1;
     overflow: visible;
+    pointer-events: none;
 }
+
 .floral-svg path {
     fill: none;
-    stroke: var(--accent-deep-purple);
-    stroke-width: 2;
+    stroke: var(--primary-soft-pink);
+    stroke-width: 2.5;
     stroke-linecap: round;
-    opacity: 0.3;
+    opacity: 0.35;
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
-    animation: drawVines 3s ease-out 1.5s forwards;
+    animation: drawVines 4s ease-out 1.2s forwards;
 }
-@keyframes drawVines { to { stroke-dashoffset: 0; } }
+
+@keyframes drawVines { 
+    to { stroke-dashoffset: 0; } 
+}
 
 
-/* --- Responsive Design --- */
+/* --- Responsive Layout & Optimization --- */
 @media (max-width: 768px) {
-    .book { transform: scale(0.8) rotateY(-30deg); }
-    .storybook-container.opening .book { transform: rotateY(0deg) scale(0.9); }
-    .finale-greeting { font-size: 2rem; }
-    .finale-name { font-size: 3rem; }
-    .finale-wish { font-size: 1rem; }
+    .storybook-container {
+        width: 380px;
+        height: 285px;
+    }
+    
+    .book-title {
+        font-size: 1.8rem;
+    }
+    
+    .title-sub {
+        font-size: 2.2rem;
+    }
+    
+    .polaroid-img {
+        width: 200px;
+        height: 155px;
+    }
+    
+    .polaroid-caption {
+        font-size: 1.3rem;
+        margin-top: 8px;
+    }
+    
+    .poem-quote {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+    
+    .poem-quote::before, .poem-quote::after {
+        font-size: 1.8rem;
+    }
+    
+    .personal-note {
+        font-size: 0.8rem;
+        line-height: 1.5;
+    }
+    
+    .poem-divider {
+        margin: 8px 0;
+    }
+    
+    .finale-greeting {
+        font-size: 2.8rem;
+    }
+    
+    .finale-name {
+        font-size: 3rem;
+    }
+    
+    .finale-wish {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    .sig-name {
+        font-size: 2.2rem;
+    }
+    
+    .countdown-container {
+        padding: 30px 20px;
+    }
+    
+    .romantic-title {
+        font-size: 1.8rem;
+    }
+    
+    .timer-number {
+        font-size: 1.8rem;
+    }
 }
 
 @media (max-width: 480px) {
-    .book { width: 300px; height: 225px; }
-    .book-title { font-size: 1.8rem; }
-    .page-text { font-size: 1.1rem; }
-    .finale-greeting { font-size: 1.8rem; }
-    .finale-name { font-size: 2.5rem; }
-    .finale-wish { font-size: 0.9rem; }
-    .finale-card { padding: 25px; }
+    .storybook-container {
+        width: 300px;
+        height: 235px;
+    }
+    
+    .book-title {
+        font-size: 1.4rem;
+        padding: 10px 5px;
+    }
+    
+    .title-sub {
+        font-size: 1.8rem;
+    }
+    
+    .polaroid-img {
+        width: 150px;
+        height: 120px;
+    }
+    
+    .polaroid-caption {
+        font-size: 1.1rem;
+        margin-top: 6px;
+    }
+    
+    .polaroid-frame {
+        padding: 8px 8px 16px 8px;
+    }
+    
+    .poem-quote {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+    
+    .poem-quote::before, .poem-quote::after {
+        font-size: 1.4rem;
+    }
+    
+    .personal-note {
+        font-size: 0.75rem;
+        line-height: 1.45;
+    }
+    
+    .poem-divider {
+        margin: 5px 0;
+    }
+    
+    .finale-greeting {
+        font-size: 2.2rem;
+    }
+    
+    .finale-name {
+        font-size: 2.4rem;
+    }
+    
+    .finale-wish {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+    
+    .sig-name {
+        font-size: 1.9rem;
+    }
+    
+    .timer-number {
+        font-size: 1.4rem;
+    }
+    
+    .timer-block {
+        padding: 8px 4px;
+        margin: 0 3px;
+    }
+    
+    .timer-label {
+        font-size: 0.65rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .action-btn {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+    }
+    
+    .music-toggle {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .music-icon-container {
+        width: 16px;
+        height: 14px;
+    }
+    
+    .music-bar {
+        width: 3px;
+    }
 }

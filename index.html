@@ -1,73 +1,221 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Magical Birthday Story</title>
+    <title>İyi Ki Doğdun Selcan! 🎂 | Yiğit'ten Sihirli Bir Hikaye</title>
+    <!-- Romantic Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Outfit:wght@300;400;600;700&family=Parisienne&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Heart Particles Background -->
     <div class="background-container"></div>
     <audio id="backgroundMusic" loop src="magical_music.mp3"></audio>
 
-    <div class="step active" id="step1">
+    <!-- Music Toggle Button -->
+    <button class="music-toggle" id="musicToggle" aria-label="Müziği Duraklat/Çal">
+        <div class="music-icon-container">
+            <span class="music-bar bar-1"></span>
+            <span class="music-bar bar-2"></span>
+            <span class="music-bar bar-3"></span>
+        </div>
+        <span class="music-tooltip">Müziği Aç</span>
+    </button>
+
+    <!-- Step 0: Geri Sayım / Karşılama Ekranı -->
+    <div class="step active" id="step0">
+        <div class="countdown-container glass-panel">
+            <div class="heart-pulse-icon">❤️</div>
+            <h1 class="romantic-title">Selcan'ın Sihirli Gününe...</h1>
+            <p class="subtitle">Zaman daralıyor sevgilim, senin için hazırladığım sürprize çok az kaldı.</p>
+            
+            <div class="countdown-timer">
+                <div class="timer-block">
+                    <span class="timer-number" id="days">00</span>
+                    <span class="timer-label">Gün</span>
+                </div>
+                <div class="timer-block">
+                    <span class="timer-number" id="hours">00</span>
+                    <span class="timer-label">Saat</span>
+                </div>
+                <div class="timer-block">
+                    <span class="timer-number" id="minutes">00</span>
+                    <span class="timer-label">Dakika</span>
+                </div>
+                <div class="timer-block">
+                    <span class="timer-number" id="seconds">00</span>
+                    <span class="timer-label">Saniye</span>
+                </div>
+            </div>
+
+            <button class="action-btn glow-btn disabled-btn" id="startMagicBtn">
+                <span class="btn-text">Sihri Başlat</span>
+                <div class="btn-glow"></div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Step 1: Hediye Kutusu -->
+    <div class="step" id="step1">
         <div class="gift-container" id="giftContainer">
             <div class="gift-box">
                 <div class="gift-lid"></div>
                 <div class="gift-bow"></div>
             </div>
-            <p class="instruction-text">A surprise is waiting...</p>
+            <p class="instruction-text">Sana bir hediye geldi... Dokun ve aç! 🎁</p>
         </div>
     </div>
 
+    <!-- Step 2: Altın Anahtar -->
     <div class="step" id="step2">
         <div class="key-container" id="keyContainer">
             <svg id="animatedKey" class="key-svg" viewBox="0 0 100 100">
-                <path d="M60,20 Q50,10 40,20 T20,20 Q10,25 20,30 T40,30 Q50,35 40,40 L40,70 L35,75 L35,80 L40,85 L45,80 L45,75 L40,70" stroke-width="5" stroke-linecap="round" fill="none"/>
+                <!-- Decorative elegant heart-shaped key path -->
+                <path d="M50,15 C40,5 25,5 20,15 C15,25 25,35 50,55 C75,35 85,25 80,15 C75,5 60,5 50,15 Z M50,55 L50,85 L40,85 L40,80 L50,80 L50,70 L40,70 L40,65 L50,65" stroke="#FFD700" stroke-width="3" stroke-linecap="round" fill="none"/>
             </svg>
-            <p class="instruction-text">A key to unlock the magic...</p>
+            <p class="instruction-text">Hikayemizin anahtarı... Kilidi açmak için üzerine tıkla! 🔑</p>
         </div>
     </div>
 
+    <!-- Step 3 & 4: 3D Storybook -->
     <div class="step" id="step3">
-        <div class="storybook-container" id="storybookContainer">
-            <div class="book">
-                <div class="book-cover" id="bookCover">
-                    <div class="cover-front">
-                        <h2 class="book-title">Your Story</h2>
+        <div class="book-section-container">
+            <div class="storybook-container" id="storybookContainer">
+                <div class="book" id="myBook">
+                    <!-- Book Cover -->
+                    <div class="book-cover" id="bookCover">
+                        <div class="cover-front">
+                            <span class="cover-sparkle left">✨</span>
+                            <h2 class="book-title">Selcan'ın<br><span class="title-sub">Aşk Hikayesi</span></h2>
+                            <p class="cover-date">31.05.2026</p>
+                            <span class="cover-sparkle right">✨</span>
+                        </div>
+                        <div class="cover-back"></div>
                     </div>
-                    <div class="cover-back"></div>
+
+                    <!-- Page 1: Metro Selfie & Cemal Süreya -->
+                    <div class="page" id="page1">
+                        <div class="page-front">
+                            <div class="polaroid-frame">
+                                <img src="images/photo1.jpg" alt="Metro Selfie" class="polaroid-img" style="object-position: center top;">
+                                <p class="polaroid-caption">Birlikte, her yere... 🚇</p>
+                            </div>
+                        </div>
+                        <div class="page-back">
+                            <div class="poem-container">
+                                <p class="poem-quote">"Öyle uzaktan seviyorum seni / yanaklarına sızan iki damla yaşını / silmekten kaçınarak... Öyle temiz, öyle derin..."</p>
+                                <p class="poem-author">— Cemal Süreya</p>
+                                <div class="poem-divider">❤️</div>
+                                <p class="personal-note">Kalabalıklar içinde bile etrafımdaki her şeyi unutup sadece senin o güzel gözlerine bakmak, bana huzur veriyor sevgilim.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page 2: Manzaralı Sarılma & Özdemir Asaf -->
+                    <div class="page" id="page2">
+                        <div class="page-front">
+                            <div class="polaroid-frame">
+                                <img src="images/photo2.jpg" alt="Seaside Portrait" class="polaroid-img">
+                                <p class="polaroid-caption">Denize karşı, el ele... 🌊</p>
+                            </div>
+                        </div>
+                        <div class="page-back">
+                            <div class="poem-container">
+                                <p class="poem-quote">"Sen bana bakma, ben senin baktığın yönde olurum..."</p>
+                                <p class="poem-author">— Özdemir Asaf</p>
+                                <div class="poem-divider">❤️</div>
+                                <p class="personal-note">İstanbul'un o güzel manzarasında, Boğaz'ın esintisinde sana sımsıkı sarıldığım her an, zaman dursun ve biz hep öyle kalalım istedim.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page 3: Gözlüklü Sevimli Selfie & Turgut Uyar -->
+                    <div class="page" id="page3">
+                        <div class="page-front">
+                            <div class="polaroid-frame">
+                                <img src="images/photo3.png" alt="Sunflower Selfie" class="polaroid-img">
+                                <p class="polaroid-caption">Gülüşünle açan çiçekler... 🌻</p>
+                            </div>
+                        </div>
+                        <div class="page-back">
+                            <div class="poem-container">
+                                <p class="poem-quote">"Seninle olmanın en güzel yanı ne biliyor musun?<br>Seni her gün yeniden sevmek..."</p>
+                                <p class="poem-author">— Turgut Uyar</p>
+                                <div class="poem-divider">❤️</div>
+                                <p class="personal-note">Gözlerindeki o sevimli sıcaklık ve yüzündeki o tatlı gülüş, dünyadaki en güzel şey. İyi ki hayatımdasın papatyam.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page 4: Gece Parkta Sarılma & Son Dilek -->
+                    <div class="page" id="page4">
+                        <div class="page-front">
+                            <div class="polaroid-frame">
+                                <img src="images/photo4.png" alt="Night Park Hug" class="polaroid-img">
+                                <p class="polaroid-caption">Gecenin içinde parıldayan yıldızım... 🌟</p>
+                            </div>
+                        </div>
+                        <div class="page-back">
+                            <div class="poem-container">
+                                <p class="poem-quote">"Seninle olmak güzel, seninle gülmek güzel... Birlikte geçen her saniye çok değerli."</p>
+                                <div class="poem-divider">❤️</div>
+                                <p class="personal-note">Parkta yorulup dinlendiğimiz, sana sımsıkı sarıldığım o tatlı an... Seninle geçirdiğim her saniye bana mutluluk veriyor sevgilim.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page 5: Tarihi Aynalı Selfie & Son Söz -->
+                    <div class="page" id="page5">
+                        <div class="page-front">
+                            <div class="polaroid-frame">
+                                <img src="images/photo5.jpg" alt="Historical Mirror Selfie" class="polaroid-img" style="object-position: center center;">
+                                <p class="polaroid-caption">En güzel günlerimizden biri... 💖</p>
+                            </div>
+                        </div>
+                        <div class="page-back">
+                            <div class="poem-container">
+                                <p class="poem-quote">"Seninle yan yana yürümek, hayatın en güzel detayı."</p>
+                                <div class="poem-divider">❤️</div>
+                                <p class="personal-note">Aynadaki yansımamıza baktığımda yanımda senin olduğunu görmek beni çok mutlu ediyor. İyi ki varsın sevgilim, doğum günün kutlu olsun.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="page" id="page1">
-                    <div class="page-front">
-                        <p class="page-text">A new chapter begins today...</p>
-                    </div>
-                    <div class="page-back">
-                        <p class="page-text">Filled with promise and new adventures...</p>
-                    </div>
-                </div>
-                <div class="page" id="page2">
-                    <div class="page-front">
-                        <p class="page-text">May it be your best one yet...</p>
-                    </div>
-                    <div class="page-back">
-                        <p class="page-text">Full of laughter, joy, and light...</p>
-                    </div>
-                </div>
-                </div>
+            </div>
+
+            <!-- Interactive Book Navigation Buttons -->
+            <div class="book-nav-controls">
+                <button class="nav-btn prev-btn" id="prevPageBtn" disabled>⬅️ Geri</button>
+                <div class="page-indicator"><span id="currentPageNum">1</span> / 6</div>
+                <button class="nav-btn next-btn" id="nextPageBtn">İleri ➡️</button>
+            </div>
+            <p class="book-instruction">Sayfaları çevirmek için aşağıdaki butonları kullanabilir ya da doğrudan kitabın üzerine tıklayabilirsin! 📖</p>
         </div>
     </div>
 
+    <!-- Step 5: Finale Kartı -->
     <div class="step" id="step5">
         <div class="finale-container">
-            <div class="finale-card">
+            <div class="finale-card glass-panel">
+                <div class="card-decor-hearts">🎈 ❤️ ✨</div>
                 <svg class="floral-svg" viewBox="0 0 400 400">
                     <path id="vine1" d="M10,200 C40,100 150,100 200,200 S360,300 390,200" />
                     <path id="vine2" d="M10,210 C40,310 150,310 200,210 S360,110 390,210" />
                 </svg>
-                <h1 class="finale-greeting">Happy Birthday</h1>
-                <h2 class="finale-name">Sapthesh!</h2>
-                <p class="finale-wish">Wishing you a day as magical as this story, and a year filled with wonderful new beginnings. May all your dreams blossom.</p>
+                <h1 class="finale-greeting">İyi Ki Doğdun!</h1>
+                <h2 class="finale-name">Selcan!</h2>
+                <div class="heart-pulse-large">💖</div>
+                <p class="finale-wish">
+                    Hayatımın en güzel hikayesi, kalbimin en özel köşesi...<br>
+                    Yeni yaşında tüm hayallerin senin gibi güzel, senin gibi parlak ve mutluluk dolu olsun sevgilim. Umarım bu yeni yaşın bize daha nice harika hatıralar, kocaman gülüşler ve tükenmez bir sevgi getirir.<br>
+                    Doğum günün kutlu olsun biriciğim, iyi ki varsın, iyi ki doğdun!
+                </p>
+                <p class="signature">Seni Çok Seven,<br><span class="sig-name">Yiğit ❤️</span></p>
+                
+                <button class="action-btn restart-btn" id="restartBtn">Hikayeyi Yeniden Oku 🔄</button>
             </div>
         </div>
     </div>
