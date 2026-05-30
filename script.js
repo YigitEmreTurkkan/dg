@@ -116,8 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Run immediately and then every second
+    let countdownInterval;
     updateCountdown();
-    const countdownInterval = setInterval(updateCountdown, 1000);
+    countdownInterval = setInterval(updateCountdown, 1000);
 
     // Start Magic Button Click
     startMagicBtn.addEventListener('click', (e) => {
